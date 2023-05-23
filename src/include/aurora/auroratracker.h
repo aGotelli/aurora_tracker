@@ -12,6 +12,12 @@
 #include "Eigen/Geometry"
 
 
+#ifdef USE_MATH_TOOLS
+#include "math_tools/LieAlgebra/lie_algebra_utilities.hpp"
+#endif
+
+
+
 class AuroraTracker
 {
 
@@ -21,6 +27,9 @@ public:
 
     std::vector<Eigen::Matrix4d> getFrames();
 
+#ifdef USE_MATH_TOOLS
+    std::vector<::LieAlgebra::SE3Pose> getFramesInSE3();
+#endif
 
 
     void updateFrame();
@@ -37,6 +46,11 @@ private:
 
     std::vector<vtkSmartPointer<vtkTrackerTool>> m_pSensors;
     std::vector<Eigen::Matrix4d> m_vSensorFrames;
+
+#ifdef USE_MATH_TOOLS
+    std::vector<::LieAlgebra::SE3Pose> m_sensor_poses_stack;
+#endif
+    
 
     int initTrackerAndTool();
     int m_iNumOfSensors;

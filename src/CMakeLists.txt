@@ -16,13 +16,29 @@ add_library(${PROJECT_NAME}
     ${PROJECT_NAME}/vtkTrackerBuffer.cxx
     ${PROJECT_NAME}/vtkTrackerTool.cxx
 )
-target_link_libraries(${PROJECT_NAME}
-    PUBLIC
-        Eigen3::Eigen
-        ${VTK_LIBRARIES}
-        ndicapi
-        real_time_tools::real_time_tools
-)
+if(math_tools_FOUND)
+    target_link_libraries(${PROJECT_NAME}
+        PUBLIC
+            Eigen3::Eigen
+            ${VTK_LIBRARIES}
+            ndicapi
+            real_time_tools::real_time_tools
+            math_tools
+    )
+    target_compile_definitions(${PROJECT_NAME}
+        PUBLIC
+            USE_MATH_TOOLS
+    )
+else()
+    target_link_libraries(${PROJECT_NAME}
+        PUBLIC
+            Eigen3::Eigen
+            ${VTK_LIBRARIES}
+            ndicapi
+            real_time_tools::real_time_tools
+    )
+endif()
+
 target_compile_options(${PROJECT_NAME}
     PRIVATE
         -Wall
@@ -56,6 +72,10 @@ target_link_libraries(main
         ${PROJECT_NAME}
         utilities
         yaml-cpp
+        math_tools
 )
-
+target_compile_definitions(main
+    PUBLIC
+        USE_MATH_TOOLS
+)
 
