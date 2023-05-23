@@ -158,30 +158,57 @@ int main()
     YAML::Node node;
 
     node["weight [g]"] = weight;
-    for(unsigned int i=0; i<3; i++){
 
-        node["sensors"]["0"]["position"]["mean"].push_back( p0_mean[i] );
-        node["sensors"]["0"]["position"]["std"].push_back( p0_std[i] );
-
-        node["sensors"]["0"]["orientation"]["mean"].push_back( R0_mean[i] );
-        node["sensors"]["0"]["orientation"]["std"].push_back( R0_std[i] );
-
-
-        node["sensors"]["1"]["position"]["mean"].push_back( p1_mean[i] );
-        node["sensors"]["1"]["position"]["std"].push_back( p1_std[i] );
-
-        node["sensors"]["1"]["orientation"]["mean"].push_back( R1_mean[i] );
-        node["sensors"]["1"]["orientation"]["std"].push_back( R1_std[i] );
-
-
-        node["sensors"]["2"]["position"]["mean"].push_back( p2_mean[i] );
-        node["sensors"]["2"]["position"]["std"].push_back( p2_std[i] );
-
-        node["sensors"]["2"]["orientation"]["mean"].push_back( R2_mean[i] );
-        node["sensors"]["2"]["orientation"]["std"].push_back( R2_std[i] );
+    YAML::Node sensor_0;
+    sensor_0["position"]["mean"]["x"] = p0_mean.x();
+    sensor_0["position"]["mean"]["y"] = p0_mean.y();
+    sensor_0["position"]["mean"]["z"] = p0_mean.z();
+    sensor_0["position"]["std"]["x"] = p0_std.x();
+    sensor_0["position"]["std"]["y"] = p0_std.y();
+    sensor_0["position"]["std"]["z"] = p0_std.z();
+    sensor_0["orientation"]["mean"]["x"] = R0_mean.x();
+    sensor_0["orientation"]["mean"]["y"] = R0_mean.y();
+    sensor_0["orientation"]["mean"]["z"] = R0_mean.z();
+    sensor_0["orientation"]["std"]["x"] = R0_std.x();
+    sensor_0["orientation"]["std"]["y"] = R0_std.y();
+    sensor_0["orientation"]["std"]["z"] = R0_std.z();
 
 
-    }
+    YAML::Node sensor_1;
+    sensor_1["position"]["mean"]["x"] = p1_mean.x();
+    sensor_1["position"]["mean"]["y"] = p1_mean.y();
+    sensor_1["position"]["mean"]["z"] = p1_mean.z();
+    sensor_1["position"]["std"]["x"] = p1_std.x();
+    sensor_1["position"]["std"]["y"] = p1_std.y();
+    sensor_1["position"]["std"]["z"] = p1_std.z();
+    sensor_1["orientation"]["mean"]["x"] = R1_mean.x();
+    sensor_1["orientation"]["mean"]["y"] = R1_mean.y();
+    sensor_1["orientation"]["mean"]["z"] = R1_mean.z();
+    sensor_1["orientation"]["std"]["x"] = R1_std.x();
+    sensor_1["orientation"]["std"]["y"] = R1_std.y();
+    sensor_1["orientation"]["std"]["z"] = R1_std.z();
+
+
+    YAML::Node sensor_2;
+    sensor_2["position"]["mean"]["x"] = p2_mean.x();
+    sensor_2["position"]["mean"]["y"] = p2_mean.y();
+    sensor_2["position"]["mean"]["z"] = p2_mean.z();
+    sensor_2["position"]["std"]["x"] = p2_std.x();
+    sensor_2["position"]["std"]["y"] = p2_std.y();
+    sensor_2["position"]["std"]["z"] = p2_std.z();
+    sensor_2["orientation"]["mean"]["x"] = R2_mean.x();
+    sensor_2["orientation"]["mean"]["y"] = R2_mean.y();
+    sensor_2["orientation"]["mean"]["z"] = R2_mean.z();
+    sensor_2["orientation"]["std"]["x"] = R2_std.x();
+    sensor_2["orientation"]["std"]["y"] = R2_std.y();
+    sensor_2["orientation"]["std"]["z"] = R2_std.z();
+
+
+    node["sensors"]["sensor_0"] = sensor_0;
+    node["sensors"]["sensor_1"] = sensor_1;
+    node["sensors"]["sensor_2"] = sensor_2;
+
+
     
 
     const std::string name = "calibration" + std::to_string(weight) + "g.yaml";
