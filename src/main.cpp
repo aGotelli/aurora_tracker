@@ -151,7 +151,7 @@ int main()
 
     
 
-    const std::string name = "gravity" + std::to_string(weight) + "g.yaml";
+    const std::string name = "gravity" /*+ std::to_string(weight) +*/ "g.yaml";
     const std::string path = "../../data/";
     std::ofstream fout( path + name);
     fout << node;
