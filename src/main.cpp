@@ -17,9 +17,9 @@ int main()
 {
 
 
-    const unsigned int weight = 120;
+    const unsigned int weight = 2500;
 
-    const unsigned int number_of_sensors = 2;
+    const unsigned int number_of_sensors = 3;
 
     AuroraTracker aurora_tracker(number_of_sensors);
 
@@ -151,7 +151,7 @@ int main()
 
     
 
-    const std::string name = "gravity" /*+ std::to_string(weight) +*/ "g.yaml";
+    const std::string name = "calibration" + std::to_string(weight) + "g.yaml";
     const std::string path = "../../data/";
     std::ofstream fout( path + name);
     fout << node;
