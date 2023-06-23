@@ -45,18 +45,20 @@ POSSIBILITY OF SUCH DAMAGES.
 #include <limits.h>
 #include <float.h>
 #include <math.h>
-#include "vtkCharArray.h"
+//#include "vtkCharArray.h"
 #include "vtkCriticalSection.h"
-#include "vtkDoubleArray.h"
+//#include "vtkDoubleArray.h"
 #include "vtkMatrix4x4.h"
 #include "vtkMultiThreader.h"
 #include "vtkMutexLock.h"
 #include "vtkObjectFactory.h"
-#include "blmc_drivers/aurora_tracking/vtkTracker.h"
-#include "vtkTransform.h"
+
+//#include "vtkTransform.h"
 #include "vtkTimerLog.h"
-#include "blmc_drivers/aurora_tracking/vtkTrackerTool.h"
-#include "blmc_drivers/aurora_tracking/vtkTrackerBuffer.h"
+
+#include "aurora/vtkTracker.h"
+#include "aurora/vtkTrackerTool.h"
+#include "aurora/vtkTrackerBuffer.h"
 
 
 //----------------------------------------------------------------------------

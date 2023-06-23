@@ -52,7 +52,7 @@ POSSIBILITY OF SUCH DAMAGES.
 #define __vtkTrackerTool_h
 
 #include <vtkObject.h>
-#include "blmc_drivers/aurora_tracking/vtkTracker.h"
+#include "aurora/vtkTracker.h"
 
 class vtkMatrix4x4;
 class vtkTransform;

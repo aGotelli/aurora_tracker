@@ -125,6 +125,9 @@ public:
   int GetFullTX(int tool, double transform[8]);
   double *GetFullTX(int tool) { this->ReturnValue[0] = (double) this->GetFullTX(tool, &this->ReturnValue[1]); return this->ReturnValue; }
 
+
+  void setBaudRate(const unsigned int t_baud_rate);
+
 protected:
   vtkNDITracker();
   ~vtkNDITracker();

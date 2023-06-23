@@ -69,7 +69,7 @@ class VTK_EXPORT vtkFrameToTimeConverter : public vtkObject
 {
 public:
   static vtkFrameToTimeConverter *New();
-  vtkTypeMacro(vtkFrameToTimeConverter,vtkObject);
+  vtkTypeMacro(vtkFrameToTimeConverter,vtkObject)
   void PrintSelf(ostream& os, vtkIndent indent);
 
   // Description:

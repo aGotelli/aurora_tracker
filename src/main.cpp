@@ -20,8 +20,19 @@ int main()
     const unsigned int weight = 2500;
 
     const unsigned int number_of_sensors = 3;
+    unsigned int baud_rate;
+    baud_rate = 9600;   //  works
+//    baud_rate =  14400;   //  ERROR: vtkNDITracker (0x55e85c483e30): Host not capable of given communications parameters
+//    baud_rate =  19200;   //  stuck forever
+//    baud_rate =  38400;   //  works
+//    baud_rate =  57600;   //  works
+//    baud_rate = 115200;   //  works
+//    baud_rate = 230400;   //  ERROR: vtkNDITracker (0x55c526506e30): Incorrect number of command parameters
+//    baud_rate = 921600;   //  ERROR: vtkNDITracker (0x55e85c483e30): Host not capable of given communications parameters
+//    baud_rate = 1228739;  //  ERROR: vtkNDITracker (0x563356aafe30): Unable to set up new communication parameters
 
-    AuroraTracker aurora_tracker(number_of_sensors);
+
+    AuroraTracker aurora_tracker(number_of_sensors, baud_rate);
 
 
     std::vector<Eigen::Matrix4d> poses(number_of_sensors);
@@ -58,13 +69,14 @@ int main()
 
         auto it = std::find_if(poses.begin(), poses.end(), [](Eigen::Matrix4d pose){ return pose.isIdentity(); });
 
-        if(it != poses.end())
+        if(it == poses.end())/*
             std::cout << "Sensor " << std::distance(poses.begin(), it) << " is not visible" << std::endl;
-        else{
+        else*/{
             //  All sensors are visible
 
             //  Log time
-            std::cout << "time: " << time << std::endl;
+            if(static_cast<int>(time*100) % 100 == 0)
+                std::cout << "time: " << time << std::endl;
 
             //  Compute the relative poses
             for(unsigned int i=0; i < number_of_sensors; i++){

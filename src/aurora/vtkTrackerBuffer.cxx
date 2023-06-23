@@ -41,7 +41,7 @@ THE USE OR INABILITY TO USE THE SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGES.
 
 =========================================================================*/
-#include "blmc_drivers/aurora_tracking/vtkTrackerBuffer.h"
+#include "aurora/vtkTrackerBuffer.h"
 #include "vtkMath.h"
 #include "vtkMatrix4x4.h"
 #include "vtkDoubleArray.h"

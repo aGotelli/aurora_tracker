@@ -2,11 +2,12 @@
 #include <iostream>
 
 
-AuroraTracker::AuroraTracker(int num_of_sensors)
+AuroraTracker::AuroraTracker(const int t_num_of_sensors,
+                             const int t_baud_rate)
+    : baud_rate( t_baud_rate ),
+      m_iNumOfSensors(t_num_of_sensors)
 {
     IsTracking = false;
-
-    m_iNumOfSensors = num_of_sensors;
 
     
 #ifdef USE_MATH_TOOLS
@@ -23,10 +24,8 @@ AuroraTracker::AuroraTracker(int num_of_sensors)
         std::cout << "Aurora Tracker initialized!" << std::endl;
         IsTracking = true;
     }
-    else
-    {
-        std::cout << "Could not initialize Aurora Tracker!" << std::endl;
-    }
+    else throw std::runtime_error("Could not initialize Aurora Tracker!");
+
 }
 
 AuroraTracker::~AuroraTracker()
@@ -90,6 +89,7 @@ int AuroraTracker::initTrackerAndTool()
 {
     //std::cout << "init" << std::endl;
     m_pTracker = vtkSmartPointer<vtkNDITracker>::New();
+    m_pTracker->setBaudRate( baud_rate );
     m_pTracker->SetSerialDevice("/dev/ttyUSB0");
     m_pTracker->Probe();
 

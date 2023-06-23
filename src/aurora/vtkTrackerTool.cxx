@@ -42,13 +42,14 @@ POSSIBILITY OF SUCH DAMAGES.
 
 =========================================================================*/
 
-#include "blmc_drivers/aurora_tracking/vtkTrackerTool.h"
 #include "vtkMatrix4x4.h"
 #include "vtkTransform.h"
 #include "vtkDoubleArray.h"
 #include "vtkAmoebaMinimizer.h"
-#include "blmc_drivers/aurora_tracking/vtkTrackerBuffer.h"
 #include "vtkObjectFactory.h"
+
+#include "aurora/vtkTrackerTool.h"
+#include "aurora/vtkTrackerBuffer.h"
 
 //----------------------------------------------------------------------------
 vtkTrackerTool* vtkTrackerTool::New()

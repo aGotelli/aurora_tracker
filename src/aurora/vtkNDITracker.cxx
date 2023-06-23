@@ -48,17 +48,17 @@ POSSIBILITY OF SUCH DAMAGES.
 #include <ctype.h>
 #include <ndicapi.h>
 #include <ndicapi_math.h>
-#include "vtkMath.h"
-#include "vtkTimerLog.h"
+//#include "vtkMath.h"
+//#include "vtkTimerLog.h"
 #include "vtkMatrix4x4.h"
-#include "vtkTransform.h"
+//#include "vtkTransform.h"
 #include "vtkCriticalSection.h"
-#include "blmc_drivers/aurora_tracking/vtkNDITracker.h"
-#include "blmc_drivers/aurora_tracking/vtkTrackerTool.h"
-#include "blmc_drivers/aurora_tracking/vtkFrameToTimeConverter.h"
+#include "aurora/vtkNDITracker.h"
+#include "aurora/vtkTrackerTool.h"
+#include "aurora/vtkFrameToTimeConverter.h"
 #include "vtkObjectFactory.h"
 #include <string.h>
-#include "vtkCharArray.h"
+//#include "vtkCharArray.h"
 
 //----------------------------------------------------------------------------
 vtkNDITracker* vtkNDITracker::New()
@@ -251,12 +251,15 @@ int vtkNDITracker::InternalStartTracking()
 
   switch (this->BaudRate)
     {
-    case 9600: baud = NDI_9600; break;
-    case 14400: baud = NDI_14400; break;
-    case 19200: baud = NDI_19200; break;
-    case 38400: baud = NDI_38400; break;
-    case 57600: baud = NDI_57600; break;
-    case 115200: baud = NDI_115200; break;
+    case   9600: baud =     NDI_9600; vtkWarningMacro(<< "\n\n\n""Set to NDI_9600 \n\n\n\n")    break;
+    case   14400: baud =   NDI_14400; vtkWarningMacro(<< "\n\n\n""Set to NDI_14400 \n\n\n\n")   break;
+    case   19200: baud =   NDI_19200; vtkWarningMacro(<< "\n\n\n""Set to NDI_19200 \n\n\n\n")   break;
+    case   38400: baud =   NDI_38400; vtkWarningMacro(<< "\n\n\n""Set to NDI_38400 \n\n\n\n")   break;
+    case   57600: baud =   NDI_57600; vtkWarningMacro(<< "\n\n\n""Set to NDI_57600 \n\n\n\n")   break;
+    case  115200: baud =  NDI_115200; vtkWarningMacro(<< "\n\n\n""Set to NDI_115200 \n\n\n\n")  break;
+    case  230400: baud =  NDI_230400; vtkWarningMacro(<< "\n\n\n""Set to NDI_230400 \n\n\n\n")  break;
+    case  921600: baud =  NDI_921600; vtkWarningMacro(<< "\n\n\n""Set to NDI_921600 \n\n\n\n")  break;
+    case 1228739: baud = NDI_1228739; vtkWarningMacro(<< "\n\n\n""Set to NDI_1228739 \n\n\n\n") break;
     default:
       vtkErrorMacro(<< "Illegal baud rate");
       return 0;
@@ -777,7 +780,7 @@ void vtkNDITracker::EnableToolPorts()
 	this->PortHandle[port] = ph;
 	}
       }
-    else // wireless tool: find the port handle
+    else // wirelesssetBaudRate tool: find the port handle
       {
       for (port = 3; port < VTK_NDI_NTOOLS; port++)
         {
@@ -894,6 +897,12 @@ int vtkNDITracker::GetFullTX(int tool, double transform[9]) {
     }
   int status = (double) ndiGetTXTransform(this->Device, ph, transform);
   return status;
+}
+
+
+void vtkNDITracker::setBaudRate(const unsigned int t_baud_rate)
+{
+  this->BaudRate = t_baud_rate;
 }
 
 //----------------------------------------------------------------------------

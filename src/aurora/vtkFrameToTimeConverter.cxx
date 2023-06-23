@@ -45,7 +45,7 @@ POSSIBILITY OF SUCH DAMAGES.
 #include <limits.h>
 #include <float.h>
 #include <math.h>
-#include "blmc_drivers/aurora_tracking/vtkFrameToTimeConverter.h"
+#include "aurora/vtkFrameToTimeConverter.h"
 #include "vtkTimerLog.h"
 #include "vtkObjectFactory.h"
 
