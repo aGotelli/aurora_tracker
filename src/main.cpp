@@ -3,8 +3,6 @@
 
 #include <real_time_tools/spinner.hpp>
 
-#include "utilities/Eigen/eigen_io.hpp"
-
 
 #include <algorithm>
 #include <numeric>

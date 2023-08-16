@@ -10,10 +10,6 @@ AuroraTracker::AuroraTracker(const int t_num_of_sensors,
     IsTracking = false;
 
     
-#ifdef USE_MATH_TOOLS
-    m_sensor_poses_stack.resize(m_iNumOfSensors);
-#endif
-
     for(int i = 0 ; i < m_iNumOfSensors ; i++)
     {
         m_vSensorFrames.push_back(Eigen::Matrix4d::Identity());
@@ -39,12 +35,6 @@ std::vector<Eigen::Matrix4d> AuroraTracker::getFrames()
     return m_vSensorFrames;
 }
 
-#ifdef USE_MATH_TOOLS
-std::vector<::LieAlgebra::SE3Pose> AuroraTracker::getFramesInSE3()
-{
-    return m_sensor_poses_stack;
-}
-#endif
 
 
 void AuroraTracker::updateFrame()
@@ -61,14 +51,6 @@ void AuroraTracker::updateFrame()
         {
           vtkSmartPointer<vtkTransform> toolTransform = vtkSmartPointer<vtkTransform>::New();
           toolTransform = m_pSensors.at(i)->GetTransform(); // get the transform of the tool with respect to the tracker reference frame
-#ifdef USE_MATH_TOOLS
-          toolTransform->GetPosition( m_sensor_poses_stack[i].m_position.data() );
-
-          double wxyz[4];
-          toolTransform->GetOrientationWXYZ( wxyz );
-          
-          m_sensor_poses_stack[i].m_quaternion = Eigen::AngleAxisd(wxyz[0], Eigen::Vector3d(wxyz[1], wxyz[2], wxyz[3]));
-#endif
 
 
           vtkSmartPointer<vtkMatrix4x4> matrix = vtkSmartPointer<vtkMatrix4x4>::New();

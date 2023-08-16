@@ -61,8 +61,7 @@ install(EXPORT ${PROJECT_NAME}Exports
 
 
 
-find_package(utilities REQUIRED)
-#find yaml-cpp
+
 find_package(yaml-cpp REQUIRED)
 include_directories(include)
 
@@ -70,7 +69,6 @@ add_executable(main main.cpp)
 target_link_libraries(main
     PUBLIC
         ${PROJECT_NAME}
-        utilities
         yaml-cpp
         math_tools
 )

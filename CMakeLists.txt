@@ -26,13 +26,7 @@ find_package(Eigen3 REQUIRED)
 find_package(real_time_tools REQUIRED)
 
 
-find_package(math_tools QUIET)
 
-if(math_tools_FOUND)
-    message(STATUS "math_tools found")
-else()
-    message(STATUS "math_tools not found")
-endif()
 
 
 
