@@ -24,8 +24,8 @@ AuroraInterface::AuroraInterface(const unsigned int t_number_of_sensors,
     m_time.clear();
 
 
-
-    m_spinner.set_period( 0.01 );
+    //  Spin faster in checking the current time to synchronise data
+    m_spinner.set_period( 0.00001 );
 
 //    stop_loop_ = false;
 
@@ -84,15 +84,16 @@ void AuroraInterface::loop()
 
 
     double current_time = 0.0;
-//    double previus_iteration_end_time = 0.0;
-//    double delta_time = 0.0;
-//    unsigned int snapshot_number=0;
+    double previus_iteration_end_time = 0.0;
+    double delta_time = 0.0;
+    unsigned int snapshot_number=0;
     m_sensors_are_ready = true;
 
-    std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
+
     std::chrono::high_resolution_clock::time_point current;
 
     std::chrono::high_resolution_clock::duration time_elapsed;
+    std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
     while (!*m_StopDemos)
     {
 
@@ -113,7 +114,7 @@ void AuroraInterface::loop()
         }
 
 
-        m_spinner.spin();
+//        m_spinner.spin();
 
         
 
@@ -121,21 +122,22 @@ void AuroraInterface::loop()
 //        snapshot_number++;
 
         
-//        delta_time = current_time - previus_iteration_end_time;
-//        // local_time += m_dt;
-//        while(!stop_loop_ and
-//              delta_time < m_dt*1000){
-//            m_spinner.spin();
+        delta_time = current_time - previus_iteration_end_time;
+        // local_time += m_dt;
+        while(!*m_StopDemos and
+              delta_time < m_dt){
+            m_spinner.spin();
 
 
-//            current = std::chrono::high_resolution_clock::now();
-//            elapsed = current - start;
-//            current_time = std::chrono::duration_cast<std::chrono::milliseconds>(elapsed).count();
+            current = std::chrono::high_resolution_clock::now();
+            time_elapsed = current - start;
 
-//            delta_time = current_time - previus_iteration_end_time;
-//        }
+            current_time = time_elapsed.count() / 1e9;
 
-//        previus_iteration_end_time = current_time;
+            delta_time = current_time - previus_iteration_end_time;
+        }
+
+        previus_iteration_end_time = current_time;
 
     }      // endwhile
 }

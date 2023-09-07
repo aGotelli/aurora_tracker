@@ -2,6 +2,7 @@
 
 
 add_library(${PROJECT_NAME}
+    SHARED
     include/${PROJECT_NAME}/auroratracker.h
     include/${PROJECT_NAME}/vtkFrameToTimeConverter.h
     include/${PROJECT_NAME}/vtkNDITracker.h
@@ -16,7 +17,7 @@ add_library(${PROJECT_NAME}
     ${PROJECT_NAME}/vtkTracker.cxx
     ${PROJECT_NAME}/vtkTrackerBuffer.cxx
     ${PROJECT_NAME}/vtkTrackerTool.cxx
-    interface/aurora_interface.cpp
+    ${PROJECT_NAME}/interface/aurora_interface.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}
