@@ -9,4 +9,4 @@ This package requires:
 -  VKT
 -  ndicapi
 
-In order to compile and install the package run './init_package.sh'
+In order to compile and install the package run `./init_package.sh`
